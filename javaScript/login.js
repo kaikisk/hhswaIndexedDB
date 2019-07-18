@@ -6,8 +6,8 @@ $(function () {
     }
 })
 function clickLoginButton () {
-    var txtName;
-    var txtPass;
+    txtName;
+    txtPass;
     var db;
     var request = indexedDB.open('hhsw');
     request.onsuccess = function (event){
