@@ -1,9 +1,7 @@
 $(function () {
-    if (localStorage.getItem("txtName") == null) {
-        //$('#signin').prop("disabled",true);
+    if (txtName == null) {
         document.getElementById("signin").disabled = true;
     } else {
-        //$('#signup').prop("disabled",true);
         document.getElementById("signup").disabled = true;
     }
 })
