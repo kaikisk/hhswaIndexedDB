@@ -168,15 +168,3 @@ self.addEventListener("notificationclick", function(event) {
     clients.openWindow("https://kaikisk.github.io/hhswa/checkAppointment.html")
   );
 });
-
-var temp = 0;
-setInterval(function(){
-    console.log(temp);
-    temp+=1;
-}, 5000);
-
-//importScripts('./javaScript/confirmDate.js');
-
-//var script = document.createElement('script');
-//script.type = 'text/javascript';
-//script.src = './javaScript/confirmDate.js';
