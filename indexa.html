@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="white">
+        <meta name="apple-mobile-web-app-title" content="HHSW">
+        <link rel="apple-touch-icon" href="/revealweb-144.png" sizes="144x144">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="ratchet.min.css" />
+        <title>健康手帳(HealthHandbook)</title>
+        <script src="./jquery-2.2.4.min.js"></script>
+        <script src="./javaScript/login.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-messaging.js"></script>
+        <script> 
+            console.log('loading serviceworker');
+            navigator.serviceWorker
+                .register('./firebase-messaging-sw.js', { scope: '.'})
+                .then(function(registration) {
+                    console.log('service worker completd');
+                    registration.update();
+                });
+        </script>
+    </head>
+
+    <body>
+        <script>
+        function notifyMe() {
+  // ブラウザが通知をサポートしているか確認する
+  if (!("Notification" in window)) {
+    alert("このブラウザはシステム通知をサポートしていません");
+  }
+
+  // すでに通知の許可を得ているか確認する
+  else if (Notification.permission === "granted") {
+    // 許可を得ている場合は、通知を作成する
+    var notification = new Notification("Hi there!");
+  }
+
+  // 許可を得ていない場合は、ユーザに許可を求めなければならない
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // ユーザが許可した場合は、通知を作成する
+      if (permission === "granted") {
+        var notification = new Notification("Hi there!");
+      }
+    });
+  }
+
+  // 最後に、ユーザが通知を拒否した場合は、これ以上ユーザに 
+  // 迷惑をかけてはいけないことを尊重すべきです。
+}
+            </script>
+        <header class="bar bar-nav">
+            <h1 class="title">健康手帳(HealthHandbook)</h1>
+        </header>
+            <br />
+            <br />
+            <br />
+            <div>ユーザー名 UserId
+                <input type="text" id="txtUserName" class="txt">
+            </div>
+            <div>パスワード Password
+                <input type="password" id="txtPass" class="txt">
+            </div>
+            <button id="signin" class="btn btn-primary btn-block" onclick="clickLoginButton()">ログイン Sign in</button>
+            <button id="signup" class="btn btn-primary btn-block" onclick="location.href='newlogin.html'">新規登録 Sign up</button>
+            <div>
+                <p>
+                    <textarea rows="5">- 更新履歴(Change log)  - </textarea>
+                </p>
+                <p>
+                    <textarea rows="5">- 更新予定(Update) - </textarea>
+                </p>
+            </div>
+
+         <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+             https://firebase.google.com/docs/web/setup#config-web-app -->
+        
+        
+        <script>
+             const messaging = firebase.messaging();
+             messaging.requestPermission().then(function() {
+             console.log('Notification permission granted.');
+             // TODO(developer): Retrieve an Instance ID token for use with FCM.
+             // ...
+             }).catch(function(err) {
+             console.log('Unable to get permission to notify.', err);
+             });    
+            firebase.initializeApp(firebaseConfig);
+        </script>
+
+        <script>
+          // Your web app's Firebase configuration
+          var firebaseConfig = {
+            apiKey: "AIzaSyBJgLkz6Fg584qVB1LooCmRA7myP_7Xezs",
+            authDomain: "healthbook-242216.firebaseapp.com",
+            databaseURL: "https://healthbook-242216.firebaseio.com",
+            projectId: "healthbook-242216",
+            storageBucket: "healthbook-242216.appspot.com",
+            messagingSenderId: "664067518579",
+            appId: "1:664067518579:web:c29181e4699321cd"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+        </script>
+    </body>
+
+</html>
