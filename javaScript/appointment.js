@@ -23,6 +23,21 @@ function appointmentRegistration(){
         var appointments = [client]; 
     }
     appointmentsString = JSON.stringify(appointments);
-    localStorage.setItem('appointments',appointmentsString);
+    //localStorage.setItem('appointments',appointmentsString);
+    var db;
+    var request = indexedDB.open('hhsw');
+    request.onsuccess = function (event){
+        db = event.target.result;
+        var ts = db.transaction(["store1"], "readwrite");
+        var store = ts.objectStore("store1");
+        var request = store.put({mykey: 'appointments', myvalue: appointmentsString});
+        request.onsuccess = function(event){
+            console.log("成功しました");
+            db.close();
+        }
+        request.onerror = function(event){
+            console.log("エラーが発生しました。");
+        }
+    }
     location.href='menu.html';
 }
