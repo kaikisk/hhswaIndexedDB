@@ -41,8 +41,9 @@ function load(download1) {
         var store = ts.objectStore("store1");
         var request = store.get(download1);
         request.onsuccess = function(event){
-            console.log("成功しました");
-            $( "#"+download1 ).val(request);
+            console.log("成功しました: event: " + event);
+            $( "#"+download1 ).val(event.target.result);
+            console.log("request: " + request)
         }
         request.onerror = function(event){
             console.log("エラーが発生しました。");
