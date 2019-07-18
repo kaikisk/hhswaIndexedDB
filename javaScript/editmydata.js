@@ -42,8 +42,8 @@ function load(download1) {
         var request = store.get(download1);
         request.onsuccess = function(event){
             console.log("成功しました: event: " + event);
-            $( "#"+download1 ).val(event.target.result);
-            console.log("request: " + request)
+            $( "#"+download1 ).val(event.target.result.myvalue);
+            console.log("request: " + request.target.result.myvalue);
         }
         request.onerror = function(event){
             console.log("エラーが発生しました。");
