@@ -19,3 +19,5 @@ openRequest.onsuccess = function(event) {
 } else {
 window.alert("このブラウザではIndexed DataBase API は使えません。");
 }
+
+
